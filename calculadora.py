@@ -219,17 +219,27 @@ class Calculadora:
     def limparTela(self):
         self.tela["text"] = ""
 
+    # Insere os caracteres clicados a tela
     def inserirNum(self, caracter):
-        # Add o ultimo caracter digitado a tela
-        self.tela["text"] += caracter
+        
+        if(caracter == '%'):
+            # realiza a operação de porcentagem
+            self.resultado = eval(self.tela["text"]) / 100
+            self.tela["text"] = str(self.resultado)
+        else:
+            # Add o ultimo caracter digitado a tela
+            self.tela["text"] += caracter
 
+    # Calcula o resultado da expressão e a exibe no display
     def result(self):
-        # Calcula o resultado da expressão e a exibe no display
         self.resultado = eval(self.tela["text"])
         self.tela["text"] = str(self.resultado)
 
 # Instaciamos a classe TK() que permite que os widgets sejam utilizados na aplicação
 root = Tk()
+
+# Acrescenta um titulo ao janela da aplicação
+root.title('Calculadora')
 
 # Passamos a variavel root como parãmetro do método construtor de Application()
 Calculadora(root)
